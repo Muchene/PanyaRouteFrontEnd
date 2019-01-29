@@ -1,16 +1,15 @@
-name: flutter_map_example
-description: A new Flutter project.
+name: panya_route_frontend
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.0
-  flutter_map:
-    path: ../
+  flutter_map: ^0.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
 
 flutter:
   uses-material-design: true
