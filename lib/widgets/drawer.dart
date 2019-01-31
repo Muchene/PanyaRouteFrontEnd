@@ -16,7 +16,7 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
       children: <Widget>[
         const DrawerHeader(
           child: const Center(
-            child: const Text("Flutter Map Examples"),
+            child: const Text("Panya Route"),
           ),
         ),
         new ListTile(

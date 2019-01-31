@@ -4,7 +4,8 @@ import '../widgets/drawer.dart';
 import 'package:latlong/latlong.dart';
 
 class HomePage extends StatelessWidget {
-  static const String route = '/';
+  static const String 
+  route = '/home';
   Widget build(BuildContext context) {
     var markers = <Marker>[
       new Marker(
@@ -37,7 +38,8 @@ class HomePage extends StatelessWidget {
 
     return new Scaffold(
       appBar: new AppBar(title: new Text("Home")),
-      drawer: buildDrawer(context, route),
+      drawer: buildDrawer(context, 
+      route),
       body: new Padding(
         padding: new EdgeInsets.all(8.0),
         child: new Column(

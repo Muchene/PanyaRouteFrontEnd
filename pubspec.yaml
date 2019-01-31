@@ -13,6 +13,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+     - family: Pacifico
+       fonts:
+         - asset: fonts/Pacifico-Regular.ttf
+           style: normal
+           weight: 700
   assets:
     - assets/map/anholt_osmbright/12/2177/
     - assets/map/anholt_osmbright/12/2178/
