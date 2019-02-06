@@ -10,6 +10,7 @@ import './pages/tap_to_add.dart';
 import './pages/offline_map.dart';
 import './pages/on_tap.dart';
 import './pages/login.dart';
+import './pages/panya_home.dart';
 
 void main() => runApp(new MyApp());
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Map Example',
+      title: 'Panya Route',
       theme: new ThemeData(
         primarySwatch: mapBoxBlue,
       ),
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         PluginPage.route: (context) => new PluginPage(),
         OfflineMapPage.route: (context) => new OfflineMapPage(),
         OnTapPage.route: (context) => new OnTapPage(),
-        HomePage.route: (context) => new HomePage(), 
+        HomePage.route: (context) => new HomePage(),
+        PanyaRouteHome.route: (context) => new PanyaRouteHome(), 
       },
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'panya_home.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
       child:  RaisedButton(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
           onPressed: () {
-            Navigator.of(context).pushNamed(HomePage.route);
+            Navigator.of(context).pushNamed(PanyaRouteHome.route);
           },
           color: Colors.lightBlueAccent,
           child: Text('Log In', style: TextStyle(color: Colors.white)),
