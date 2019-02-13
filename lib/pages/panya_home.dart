@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import '../widgets/drawer.dart';
 import 'package:latlong/latlong.dart';
-
+import 'models.dart';
+import 'navigation_page.dart';
 
 
 
@@ -20,7 +21,12 @@ class PanyaRouteHomeState extends State<PanyaRouteHome> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 
-  List<String> locations = ["Nairobi", "Naivasha", "Limuru", "Kiambu", "Gitrau"];
+  List<Location> locations = [
+    new Location("Nairobi", LatLng(-1.2921, 36.8219)),
+    new Location("Kikuyu",  LatLng(-1.2472, 36.6791)),
+    new Location("Limuru",  LatLng(-1.1069, 36.6431)),
+    new Location("Kiambu",  LatLng(-1.1462, 36.9665)),
+    new Location("Gitaru",  LatLng(-1.2335, 36.6715))];
   TextEditingController searchBarController = new TextEditingController();
 
   @override
@@ -38,26 +44,25 @@ class PanyaRouteHomeState extends State<PanyaRouteHome> {
 
   void searchBarListener() {
      setState(() {
-      _isSearching = !searchBarController.text.isEmpty;
+      _isSearching = searchBarController.text.isNotEmpty;
      });
-    // if(_isSearching){
-    //   print("SEARCH: ${searchBarController.text}");
-    // }else{
-    //   print("Shouldn't be searching");
-    // }
+  }
+
+  Location getCurrentLocation() {
+    return  Location("Nairobi", LatLng(-1.28512, 36.829));
   }
 
   Widget suggestionList() {
     Widget map = new FlutterMap(
       options: new MapOptions(
-      center: new LatLng(1.29, 36.829),
+      center:getCurrentLocation().getLatLng(),
       zoom: 6.0,
       ),
       layers: [
         new TileLayerOptions(
           urlTemplate:
               "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-          subdomains: ['a', 'b', 'c'],
+          subdomains: ['a', 'b', 'c'], 
         )
       ],
     );
@@ -68,7 +73,16 @@ class PanyaRouteHomeState extends State<PanyaRouteHome> {
     for (var loc in locations) {
       suggestionItem.add(new ListTile(
         leading: Icon(Icons.location_on),
-        title: new Text(loc)));
+        title: new Text(loc.getName()),
+        onTap: (){
+          Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NavigationPage(getCurrentLocation(), loc),
+          )
+          );
+        },
+        ));
     }
 
     return new ListView(
