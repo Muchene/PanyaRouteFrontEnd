@@ -58,7 +58,7 @@ class PanyaRouteHomeState extends State<PanyaRouteHome> {
 
   void onWebCreated(webController) {
     this.webController = webController;
-    this.webController.loadUrl("https://openlayersbook.github.io/ch10-openlayers-goes-mobile/example-04.html");
+    this.webController.loadUrl("http://45.79.185.231:4574/index.html");
     this.webController.onPageStarted.listen((url) =>
         print("Loading $url")
     );
