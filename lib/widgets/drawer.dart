@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import '../pages/animated_map_controller.dart';
 import '../pages/esri.dart';
 import '../pages/home.dart';
-import '../pages/map_controller.dart';
-import '../pages/marker_anchor.dart';
-import '../pages/offline_map.dart';
-import '../pages/plugin_api.dart';
-import '../pages/polyline.dart';
-import '../pages/tap_to_add.dart';
-import '../pages/on_tap.dart';
+import '../pages/panya_home.dart';
 
 Drawer buildDrawer(BuildContext context, String currentRoute) {
   
@@ -33,12 +27,12 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
     child: new ListView(
       children: <Widget>[
         header,
-        new ListTile(
-          leading: new Icon(Icons.location_city),
-          title: const Text('Work'),
+         new ListTile(
+          leading: new Icon(Icons.explore),
+          title: const Text('Explore'),
           selected: currentRoute == HomePage.route,
           onTap: () {
-            Navigator.pushReplacementNamed(context, HomePage.route);
+            Navigator.pushNamed(context, PanyaRouteHome.route);
           },
         ),
         new ListTile(
@@ -46,9 +40,19 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           title: const Text('Home'),
           selected: currentRoute == HomePage.route,
           onTap: () {
-            Navigator.pushReplacementNamed(context, HomePage.route);
+            Navigator.pushNamed(context, HomePage.route);
           },
         ),
+        new ListTile(
+          leading: new Icon(Icons.location_city),
+          title: const Text('Work'),
+          selected: currentRoute == HomePage.route,
+          onTap: () {
+            Navigator.pushNamed(context, HomePage.route);
+          },
+        ),
+      
+        
       ],
     ),
   );

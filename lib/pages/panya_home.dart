@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_web/flutter_native_web.dart';
-import 'package:flutter_map/flutter_map.dart';
+import '../widgets/map.dart';
 import '../widgets/drawer.dart';
 import 'package:latlong/latlong.dart';
 import 'models.dart';
 import 'navigation_page.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/foundation.dart';
+import '../utils/permissions.dart';
+import 'dart:async';
 
 
 
 class PanyaRouteHome extends StatefulWidget {
   static const String route = "panya_home";
+  
 
   @override
   PanyaRouteHomeState createState() => new PanyaRouteHomeState();
@@ -31,15 +31,35 @@ class PanyaRouteHomeState extends State<PanyaRouteHome> {
     new Location("Kiambu",  LatLng(-1.1462, 36.9665)),
     new Location("Gitaru",  LatLng(-1.2335, 36.6715))];
   TextEditingController searchBarController = new TextEditingController();
-  WebController webController;
+ 
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
+    requestPermission();
     _isSearching = false;
     searchBarController.addListener(searchBarListener);
   }
 
+  void requestPermission() async {
+    print("REQUESTING PERMISSION");
+    PermissionRequest req = PermissionRequest();
+    PermissionState permissionState = await req.getPermission(PermissionType.LOCATION);
+    print("REQUESTED PERMISSION");
+    switch (permissionState) {
+      case PermissionState.GRANTED:
+        print("GOT LOCATION PERMISSION");
+        break;
+      case PermissionState.DENIED:
+        await new Future.delayed(new Duration(seconds : 1));
+        print("DENIED PERMISSION");
+        break;
+      case PermissionState.SHOW_RATIONALE:
+        //_view.showPermissionRationale();
+        print("SHOW RATIONALE");
+        break;
+    }
+  }
   @override
   void dispose() {
     searchBarController.dispose();
@@ -56,42 +76,10 @@ class PanyaRouteHomeState extends State<PanyaRouteHome> {
     return  Location("Nairobi", LatLng(-1.28512, 36.829));
   }
 
-  void onWebCreated(webController) {
-    this.webController = webController;
-    this.webController.loadUrl("http://45.79.185.231:4574/index.html");
-    this.webController.onPageStarted.listen((url) =>
-        print("Loading $url")
-    );
-    this.webController.onPageFinished.listen((url) =>
-        print("Finished loading $url")
-    );
-  }
+  
   Widget suggestionList() {
-    //  Transform.rotate(
-    //   angle: -pi / 12.0,
-    //   child:
-    //  new FlutterMap(
-    //   options: new MapOptions(
-    //   center:getCurrentLocation().getLatLng(),
-    //   zoom: 6.0,
-    //   ),
-    //   layers: [
-    //     new TileLayerOptions(
-    //       urlTemplate:
-    //           "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    //       subdomains: ['a', 'b', 'c'], 
-    //     )
-    //   ],
-    // );
-    FlutterNativeWeb flutterWebView = new FlutterNativeWeb(
-      onWebCreated: onWebCreated,
-      gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
-        Factory<OneSequenceGestureRecognizer>(
-        () => TapGestureRecognizer(),
-        ),
-      ].toSet(),
-    );
-    Widget map = flutterWebView; 
+    
+    Widget map = MapFactory().createMap();
 
     if(!_isSearching) { //return the map
       return  map;
@@ -119,6 +107,7 @@ class PanyaRouteHomeState extends State<PanyaRouteHome> {
       children: suggestionItem,
     );
   }
+  
   void searchButtonPressed() {
     setState(() {
       if(!_isSearching) {
