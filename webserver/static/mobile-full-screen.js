@@ -1,8 +1,8 @@
-import Geolocation from '../src/ol/Geolocation.js';
-import Map from '../src/ol/Map.js';
-import View from '../src/ol/View.js';
-import TileLayer from '../src/ol/layer/Tile.js';
-import BingMaps from '../src/ol/source/BingMaps.js';
+import Geolocation from '../ol/Geolocation.js';
+import Map from '../ol/Map.js';
+import View from '../ol/View.js';
+import TileLayer from '../ol/layer/Tile.js';
+import BingMaps from '../ol/source/BingMaps.js';
 
 
 const view = new View({
