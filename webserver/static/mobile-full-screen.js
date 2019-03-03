@@ -4,6 +4,7 @@ import View from 'ol/View.js';
 import TileLayer from 'ol/layer/Tile.js';
 import BingMaps from 'ol/source/BingMaps.js';
 
+MapChannel.postMessage("TRYING TO PASS THIS MESSAGE");
 
 const view = new View({
   center: [0, 0],
@@ -27,6 +28,7 @@ const geolocation = new Geolocation({
   projection: view.getProjection(),
   tracking: true
 });
+
 geolocation.once('change:position', function() {
   view.setCenter(geolocation.getPosition());
   view.setResolution(2.388657133911758);
