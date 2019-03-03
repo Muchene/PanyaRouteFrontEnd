@@ -35,7 +35,7 @@ class MapFactory{
 
   WebView createMap() {
     return WebView(
-          initialUrl: "https://openlayers.org/en/latest/examples/mobile-full-screen.html",
+          initialUrl: "https://panyaroute.net",
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);
